@@ -16,9 +16,15 @@ def index():
 def design():
     return render_template('design.html')
 
+@app.route('/shows/most-rated')
+def most_rated():
+    most_rated_shows = queries.get_most_rated()
+    print(most_rated_shows)
+    return render_template('most_rated_shows.html', most_rated_shows = most_rated_shows)
+
 
 def main():
-    app.run(debug=False)
+    app.run(debug=True)
 
 
 if __name__ == '__main__':

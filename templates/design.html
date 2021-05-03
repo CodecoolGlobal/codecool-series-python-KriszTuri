@@ -44,6 +44,7 @@
         </div>
     </header>
     <section>
+        {% block breadcrum %}
         <nav class="breadcrumb">
             <a href="#">Game of Thrones</a>
             <span class="separator">&gt;</span>
@@ -51,9 +52,12 @@
             <span class="separator">&gt;</span>
             <a href="#">Episode 8</a>
         </nav>
-        <h1 class="title text-center">Welcome page</h1>
+        {% endblock %}
+        
+        <h1 class="title text-center">{% block title %}Welcome page{% endblock %}</h1>
         <div class="card">
             <h2>Welcome TV show lovers!</h2>
+            {% block welcomediv %}
             <p>This great site is happy to bring you your favourite TV show's <i>details</i>.</p>
             <p></p>
             <p>Okay, actually this is a designed dumb page without any logic.</p>
@@ -61,7 +65,10 @@
                 in-depth
                 navigation.
             </p>
+            {% endblock %}
         </div>
+        
+        {% block table %}
         <div class="card">
             This is an example for a table:
             <table>
@@ -127,7 +134,10 @@
                 </tr>
                 </tbody>
             </table>
+        
         </div>
+        {% endblock %}
+        {% block cardview %}
         <div class="card detailed-view">
             <p>And here is a "detailed" kind of view:</p>
             <div class="row">
@@ -149,6 +159,8 @@
                     Miller</a></p>
             </div>
         </div>
+        {% endblock %}
+        {% block card %}
         <div class="card">
             <p>A form example to edit a TV show's episode:</p>
             <form action="#" method="post">
@@ -184,6 +196,7 @@
                 </p>
             </form>
         </div>
+        {% endblock %}
     </section>
     <footer>
         Copyright, bla-bla

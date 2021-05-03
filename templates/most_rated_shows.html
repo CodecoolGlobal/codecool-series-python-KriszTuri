@@ -1,0 +1,47 @@
+{% extends 'design.html' %}
+
+{% block breadcrum %}{% endblock %}
+{% block title %}TOP 15 most rated shows{% endblock %}
+{% block welcomediv %}Here you can see the top 15 most rated shows below in a sweet little table.{% endblock %}
+    {% block table %}
+        <div class="card">
+            TOP 15 most rated shows:
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Average Runtime Length</th>
+                    <th>Rating</th>
+                    <th>Genres</th>
+                    <th>Link to Trailer</th>
+                    <th>Link to Homepage</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for show in most_rated_shows %}
+                    <tr>
+                    <td><a href="{{ '/show/' + (show['id'] | string) }}">{{show['title']}}</a></td>
+                    <td>{{show['year']}}</td>
+                    <td>{{show['runtime']}}</td>
+                    <td>{{show['rating']}}</td>
+                    <td>{{show['name']}}</td>
+                    {% if show['trailer']: %}
+                        <td><a href="{{(show['trailer']| string)}}">{{show['trailer']}}</a></td>
+                    {% else: %}
+                        <td>No URL available</td>
+                    {% endif %}
+                    {% if show['homepage']: %}
+                        <td><a href="{{(show['homepage']| string)}}">{{show['homepage']}}</a></td>
+                    {% else: %}
+                        <td>No URL available</td>
+                    {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+
+{% block cardview %}{% endblock %}
+{% block card %}{% endblock %}
