@@ -2,10 +2,9 @@
 
 {% block breadcrum %}{% endblock %}
 {% block title %}TOP 15 most rated shows{% endblock %}
-{% block welcomediv %}Here you can see the top 15 most rated shows below in a sweet little table.{% endblock %}
+{% block welcomediv %}Here you can see the most rated shows (highest to lowest) in a sweet little table.{% endblock %}
     {% block table %}
         <div class="card">
-            TOP 15 most rated shows:
             <table>
                 <thead>
                 <tr>
@@ -19,7 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for show in most_rated_shows %}
+                    {% for show in most_rated_shows[start:end] %}
                     <tr>
                     <td><a href="{{ '/show/' + (show['id'] | string) }}">{{show['title']}}</a></td>
                     <td>{{show['year']}}</td>
@@ -38,10 +37,30 @@
                     {% endif %}
                     </tr>
                     {% endfor %}
+                    
                 </tbody>
             </table>
         </div>
     {% endblock %}
+    {% block card %}<br><br>{% endblock %}
+    {% block pagination %}
+        {% if current_page == 0: %}
+            <label style="color: grey;">«</label>
+        {% else %}
+            {% if prev_page == 0 %}
+                <a href="{{ '/shows/most-rated'}}">«</a>
+            {% else %}
+                <a href="{{ '/shows/most-rated/' + (prev_page | string) }}">«</a>
+            {% endif %}
+        {% endif %}
+        {% for pg in range(page_count) %}
+            {% if pg == current_page: %}
+                <label style="color: rgb(203, 75, 70);">{{pg+1}}</label>
+            {% else: %}
+                {{pg+1}}
+            {% endif %}
+        {% endfor %}
+        <a href="{{ '/shows/most-rated/' + (next_page | string) }}">»</a>
+    {% endblock %}
 
 {% block cardview %}{% endblock %}
-{% block card %}{% endblock %}
