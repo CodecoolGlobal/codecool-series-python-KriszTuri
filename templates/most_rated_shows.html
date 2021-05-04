@@ -2,19 +2,25 @@
 
 {% block breadcrum %}{% endblock %}
 {% block title %}TOP 15 most rated shows{% endblock %}
-{% block welcomediv %}Here you can see the most rated shows (highest to lowest) in a sweet little table.{% endblock %}
+{% block welcomediv %}
+    <p>Here you can see all the shows we handpicked in a sweet little table.</p>
+    <p>You can order this little handy list by Title, Year, Average Runtime Length and Rating - just click the headers to do so.</p>
+    <p>If you'd like to change order of the values (highest to lowest or lowest to highest) use the arrows in the last coloumn!</p>
+
+{% endblock %}
     {% block table %}
         <div class="card">
             <table>
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Release Date</th>
+                    <th>Year</th>
                     <th>Average Runtime Length</th>
                     <th>Rating</th>
                     <th>Genres</th>
                     <th>Link to Trailer</th>
                     <th>Link to Homepage</th>
+                    <th class="action-column">Order</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +41,10 @@
                     {% else: %}
                         <td>No URL available</td>
                     {% endif %}
+                    <td class="action-column">
+                        <button type="submit" name= "orderByASC" id="buttonASC" value="ASC" class="icon-button"><i class="fa fa-arrow-up"></i></button>
+                        <button type="submit" name= "orderByDESC" id="buttonDESC" value="DESC" class="icon-button"><i class="fa fa-arrow-down"></i></button>
+                    </td>
                     </tr>
                     {% endfor %}
                     
@@ -60,7 +70,15 @@
                 {{pg+1}}
             {% endif %}
         {% endfor %}
-        <a href="{{ '/shows/most-rated/' + (next_page | string) }}">»</a>
+        {% if current_page == 61: %}
+            <label style="color: grey;">»</label>
+        {% else %}
+            <a href="{{ '/shows/most-rated/' + (next_page | string) }}">»</a>
+        {% endif %}
     {% endblock %}
+    {% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="../static/js/get-value.js"></script>
+    {% endblock %}
 {% block cardview %}{% endblock %}
